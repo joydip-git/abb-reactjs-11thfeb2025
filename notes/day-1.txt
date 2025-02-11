@@ -1,1 +1,142 @@
 https://github.com/joydip-git/abb-reactjs-11thfeb2025
+
+
+s/w:
+	Node JS	=> JS runtime (along with it a package manager s/w is installed, known as NPM or Node Package manager) 
+	[link: https://nodejs.org/en]
+	>node -v
+	>npm -v
+
+	VS Code => Editor [link: https://code.visualstudio.com/download]
+
+React Native:
+	a technology/library to create mobile apps
+
+React JS:
+	NOT a framework
+	It's just a JS library
+	Its a front-end development library
+	Helps you build front-end app using components very quickly
+	it helps you to pass data between the code and the view of the component effortlessly
+
+
+Component: its a small piece of the front-end which consists of a small piece of design (view) and the corresponding code (event handlers and data)
+Angular, React, Vue etc. all use components
+a component is nothing but a function in JS which returns a view (design), displaying some data and may be the controls in that design have even event handlers (listeners)
+
+JavaScript => TypeScript (a superset of JS)
+
+
+HTML => self-closing or empty tag -> a tag without any content or child tags
+
+app development (web) servers -> hosts one app at a time in the dev machine using a port number other than 80
+
+lite-server, live server, webpack dev server etc.
+
+
+JS data types:
+number, string, boolean, object, function
+
+undefined, NaN, Infinity etc.
+
+variables:
+var x = 10
+x='Joydip'
+
+fuunction add(a,b){
+	return a+b
+}
+
+add(12,13)
+add(12,'joydip')
+add(true,'a')
+
+JS is loosely typed language where var (const an let also) keyword(s) is/are used to declare variables. no strict data typing is used. the vlaue of variable is subject to change and to a value of different data type
+
+in JS there is no static type checking, hence it is also known as dynmaic language, since the type checking is done during runtime
+
+TS =>
+	a. strict data typing
+	b. static type checking
+
+TypeScript is a development mode language
+It needs to be converted to JS before execution
+
+Transpiler (Transformation + compilation)
+(some other script to javascript and newer version to older version code)
+TS => JS -> typescript compiler (tsc)
+> npm i typescript -D
+
+tsconfig.json -> configuration file for typescript transpiler
+to create this file (should be at the root of the app directory)
+>.\node_modules\.bin\tsc --init
+
+
+NPM => download and install TSC in the app or in the system
+
+global: in the system
+	>npm install/i <package-name> --location=global
+
+local: in the application
+	>npm install/i <package-name> [-D] (if the package is development mode package)
+
+all packages will be stored inside node_modules folder
+executables related to every package will be inside .bin folder inside node_modules
+
+package.json file => maintains the list of dependencies for an application among many other information (such as version no, name, author etc.). the file MUST be at the root fo the app directory.
+to create this file use the following command
+>npm init [--yes] (yes to all default configuration and its values to be present in the package.json file)
+
+
+ES => ECMAScript 
+the guidline/specificatiion for all scripting languages
+TSC version >=5.5.0 can convert any TS code back to mimimum ES5 version not below that version
+TSC version < 5.5.0 can convert any TS code back to mimimum ES3/ES2 version not below that version
+
+ES1
+ES2
+ES3
+ES5 -> 2011
+ES6 -> 2015
+....
+
+
+welcome component design:
+
+<h2 id="mainHeader">
+    This is JavaScript Components
+</h2>
+<br/>
+<button type='button' id='btnClick'>Click Me!!!</button>
+
+
+module loader => understand and resolve dependencies among the JS/TS files and load the dependencies (modules) in the runtime
+in any browser there is no module loader, hence you have to supply
+requirejs, commonjs, systemjs etc.
+
+require js => this module loader needs a differnt module format (AMD) other than ES module format
+
+different ways to create JS modules
+module formats: 
+	ES6 module format
+		export => export member, 
+		import => import {} from './...'
+
+	Common JS module format
+		export => module.exports = {member}
+		import => var x = require('./...')
+
+	AMD (Asynchronous module definition) format
+	export => define('',[], function(){//code})
+	import => var x = require('./...')
+
+	UMD (Universal module definition) format
+	export => require('',[], function(){//code})
+	import => var x = require('./...')
+
+	IIFE (Immediately Invocable Function Expression)
+	....
+
+
+create-react-app tool to create react js app
+
