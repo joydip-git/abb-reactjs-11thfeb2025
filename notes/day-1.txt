@@ -195,12 +195,40 @@ export function Welcome(){
 	}
 }
 
-JSX/tsx syntax rules
+JSX/tsx syntax rules:
+----------------------------------
 1. one root react element, can't have adjacent elements
 2. to bind data and.or event handlers, use {} (any dyanmic data to bind use {})
 
 React JS component displaying list of items:
+-----------------------------------------------------------
 use item-array.map() method
+Note: 
+Key property of React Component => used when you generate/create a list of JSX elements. every element in that list must have an unique value for "key" property.
+
+
+React design best practices:
+DO NOT CREATE 'FAT' COMPONENTS. Split the component into several smaller components, each taking responsibility of one task.
+
+
+Passing data between component:
+
+a. from parent to nested component:
+	pass data using props
+	props is nothing an object with a collection of properties using which we pass data from parent to nested component function
+
+	Non-JSX
+	const propsObj:ProductRowPropType={ productInfo:p, message:welcomeMessage}
+	ProductRow(propsObj)
+
+	//ProductRow(p)
+
+	JSX [here properties are attributes]
+	<ProductRow productInfo={p} message={welcomeMessage} />
+	
+	<input type='text' value='welcome'/>
+
+b. from nested to parent:
 
 JS functions:
 declaration syntax:
@@ -209,6 +237,69 @@ expression syntax
 	const/let/var add = function(a,b){return a+b}
 expression syntax with arrow operator (arrow function)
 	const/let/var add = (a,b) => a+b
+
+
+type typeA={
+	x:number
+}
+type typeB ={
+	y:string
+}
+
+type masterType= typeA & typeB
+
+interface IA{
+	x:number
+}
+interface IB{
+	y:string
+}
+interface IMaster:IA,IB{
+}
+
+
+JS new features (introduced in ES6 in 2015):
+----------------------------------------------------
+spread and rest operator
+
+const anilObj = {
+    id: 1,
+    name: 'anil',
+    salary: 1000
+}
+//spread operator (...)
+const copy = { ...anilObj }
+console.log(anilObj);
+console.log(copy);
+
+const numbers = [1, 2, 3, 4]
+const copyNumbers = [...numbers]
+
+console.log(numbers);
+console.log(copyNumbers);
+
+// function calcAvg(name: string, marks: number[]) {
+
+// }
+
+
+//rest operator (...)
+//to declare an array in the function as argument, where any number of parameters (after the fixed number of arguments) can be passed
+//ONLY one such array is permitted in the argument lost of the function
+function calcAvg(name: string, ...marks: number[]) {
+    let sum = 0
+    marks.forEach(
+        (mark) => {
+            sum += mark
+        }
+    )
+    return `${name} has secured avg marks: ${sum / marks.length}`
+}
+console.log(calcAvg('prabhat', 70, 80))
+console.log(calcAvg('joydip', 70, 80, 90))
+
+//document.body.append(e1,e2,e3)
+
 
 
 

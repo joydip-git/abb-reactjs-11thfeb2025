@@ -1,11 +1,14 @@
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
+import { StrictMode } from "react";
 
-const appReactElement = App()
-const rootDiv = document.getElementById('root') as HTMLElement
+const root = document.getElementById('root') as HTMLElement;
 
-//createRoot lets you create a root to display React components inside a browser DOM node.
-const rootReactElement = createRoot(rootDiv)
+//StrictMode -> a built-in component. Lets you find common bugs in your components early during development.
 
-//render method creates the desired HTML element from the React element as returned by the App component function and then pushes the same inside the root element
-rootReactElement.render(appReactElement)
+createRoot(root)
+    .render(
+        <StrictMode>
+            <App />
+        </StrictMode>
+    )

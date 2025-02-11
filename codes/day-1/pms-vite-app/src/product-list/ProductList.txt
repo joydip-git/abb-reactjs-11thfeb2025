@@ -1,9 +1,9 @@
+// import { JSX } from "react"
 import './ProductList.css'
 import ProductRow from "../product-row/ProductRow"
-import { Product } from '../models/product'
 
 function ProductList() {
-    const productRecords: Product[] = [
+    const productRecords = [
         {
             "productId": 1,
             "productName": "Leaf Rake",
@@ -55,6 +55,23 @@ function ProductList() {
             "imageUrl": "http://openclipart.org/image/300px/svg_to_png/120337/xbox-controller_01.png"
         }
     ]
+
+    // const productListElement: JSX.Element[] =
+    //     productRecords.map(
+    //         function (p) {
+    //             const rowElement = ProductRow({ productInfo: p })
+    //             return rowElement
+    //         }
+    //     )
+
+    const productListElement = productRecords.map(
+        function (p) {
+            // const rowElement = <ProductRow productInfo={p} />
+            // return rowElement
+            return <ProductRow productInfo={p} />
+        }
+    )
+
     const productTable = (
         <table>
             <thead>
@@ -66,14 +83,7 @@ function ProductList() {
                 </tr>
             </thead>
             <tbody>
-                {
-                    productRecords
-                        .map(
-                            (p) => {
-                                return <ProductRow key={p.productId} productInfo={p} />
-                            }
-                        )
-                }
+                {productListElement}
             </tbody>
         </table>
     )
