@@ -197,7 +197,10 @@ export function Welcome(){
 
 JSX/tsx syntax rules
 1. one root react element, can't have adjacent elements
+2. to bind data and.or event handlers, use {} (any dyanmic data to bind use {})
 
+React JS component displaying list of items:
+use item-array.map() method
 
 JS functions:
 declaration syntax:
