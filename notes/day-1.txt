@@ -229,6 +229,7 @@ a. from parent to nested component:
 	<input type='text' value='welcome'/>
 
 b. from nested to parent:
+	by calling a function in the parent component (which has to be passed from the parent to the nested component first)
 
 JS functions:
 declaration syntax:

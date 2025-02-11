@@ -1,6 +1,6 @@
 import './ProductList.css'
 import ProductRow from "../product-row/ProductRow"
-import { Product } from '../models/product'
+import { Product } from '../../../models/product'
 
 function ProductList() {
     const productRecords: Product[] = [
@@ -55,27 +55,42 @@ function ProductList() {
             "imageUrl": "http://openclipart.org/image/300px/svg_to_png/120337/xbox-controller_01.png"
         }
     ]
+
+    const deleteProductHandler = (id: number) => {
+        let foundIndex = -1;
+        foundIndex = productRecords.findIndex(p => p.productId === id)
+        if (foundIndex >= 0) {
+            productRecords.splice(foundIndex, 1)
+        }
+    }
+
     const productTable = (
-        <table>
-            <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Rating</th>
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    productRecords
-                        .map(
-                            (p) => {
-                                return <ProductRow key={p.productId} productInfo={p} />
-                            }
-                        )
-                }
-            </tbody>
-        </table>
+        <>
+            <h2>
+                List of Products
+            </h2>
+            <table className='table table-hover'>
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Rating</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody className='table-dark'>
+                    {
+                        productRecords
+                            .map(
+                                (p) => {
+                                    return <ProductRow key={p.productId} productInfo={p} deleteProduct={deleteProductHandler} />
+                                }
+                            )
+                    }
+                </tbody>
+            </table>
+        </>
     )
     return productTable
 }
