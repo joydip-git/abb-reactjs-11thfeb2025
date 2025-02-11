@@ -103,11 +103,13 @@ ES6 -> 2015
 
 welcome component design:
 
+<div>
 <h2 id="mainHeader">
     This is JavaScript Components
 </h2>
 <br/>
 <button type='button' id='btnClick'>Click Me!!!</button>
+</div>
 
 
 module loader => understand and resolve dependencies among the JS/TS files and load the dependencies (modules) in the runtime
@@ -139,4 +141,74 @@ module formats:
 
 
 create-react-app tool to create react js app
+
+will help create an React JS application with all the configuratin files, the setting, the transpiler, loader etc.
+React JS libraries => react and react-dom
+
+A. create react application with installing create-react-app tool in your system
+
+install create-react-app tool globally in your system
+>npm i create-react-app --localtion=global
+path: C:\Users\<user-name>\AppData\Roaming\npm
+
+to create an application:
+with JS -> create-react-app <app-name> [--template javascript]
+with TS -> create-react-app <app-name> --template typescript
+
+B. create react application without installing create-react-app tool in your system
+
+to create an application:
+with JS -> >npx create-react-app <app-name> [--template javascript]
+with TS -> >npx create-react-app <app-name> --template typescript
+
+
+to resolve peer dependencies:
+npm i --legacy-peer-deps
+
+using Vite to create react app: (and even others)
+>npm create vite@latest
+
+
+
+
+React JS component:
+
+Welcome.tsx/.ts
+
+import { createElement } from 'react'
+export function Welcome(){
+      //var headerReactElement = createElement('h2',{ id:'mainHeader'},'Welcome to React JS')
+	//JSX or TSX sytnax
+	var  headerReactElement = (
+		<h2 id='mainHeader'>
+			Welcome to React JS
+		</h2>
+	);
+      return headerReactElement;
+}
+
+{
+	type:'h2',	
+	props:{
+		id:'mainHaeder'
+		children:['Welcome to React JS']
+	}
+}
+
+JSX/tsx syntax rules
+1. one root react element, can't have adjacent elements
+
+
+JS functions:
+declaration syntax:
+	function add(a,b){ return a+b }
+expression syntax
+	const/let/var add = function(a,b){return a+b}
+expression syntax with arrow operator (arrow function)
+	const/let/var add = (a,b) => a+b
+
+
+
+
+
 
