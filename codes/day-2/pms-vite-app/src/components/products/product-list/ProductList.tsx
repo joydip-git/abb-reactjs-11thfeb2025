@@ -1,14 +1,16 @@
 import './ProductList.css'
 import ProductRow from "../product-row/ProductRow"
 import { Product } from '../../../models/product'
-import { JSX, useState } from 'react'
-import { getProducts } from '../../../services/productservice'
+import { JSX, useEffect, useState } from 'react'
+import { deleteProduct, getProducts } from '../../../services/productservice'
+import ProductDetail from '../product-detail/ProductDetail'
 
 function ProductList() {
 
     const [productState, updateProductState] = useState<Product[]>([])
     const [fetchStatus, updateFetchStatus] = useState<boolean>(false)
     const [errorInfo, updateErrorInfo] = useState<string>('')
+    const [selectedId, setSelectedId] = useState<string>("0")
 
     const fetchProducts = async () => {
         try {
@@ -29,17 +31,52 @@ function ProductList() {
         }
     }
 
-    const deleteProductHandler = (id: number) => {
-        if (productState.length > 0) {
-            const copy = [...productState]
-            let foundIndex = -1;
-            foundIndex = copy.findIndex(p => p.id === id)
-            if (foundIndex >= 0) {
-                copy.splice(foundIndex, 1)
-                console.log(copy);
-                updateProductState(copy)
+    useEffect(
+        () => {
+            console.log('sending request...')
+            fetchProducts()
+        },
+        []
+    )
+
+    // useEffect(
+    //     () => {
+    //         console.log('this will be executed everytime');
+    //     }
+    // )
+
+    const removeProduct = async (id: string) => {
+        try {
+            const response = await deleteProduct(id)
+            if (response.status === 200) {
+                //fetch fresh records from backend
+                fetchProducts()
+
+                //or update the locally present data by removing the same product from the local copy
+                // if (productState.length > 0) {
+                //     const copy = [...productState]
+                //     let foundIndex = -1;
+                //     foundIndex = copy.findIndex(p => p.id === id)
+                //     if (foundIndex >= 0) {
+                //         copy.splice(foundIndex, 1)
+                //         console.log(copy);
+                //         updateProductState(copy)
+                //     }
+                // }
+            } else {
+                updateErrorInfo(`issue: ${response.statusText}`)
             }
+        } catch (error: any) {
+            updateErrorInfo(`issue: ${error.message}`)
         }
+    }
+    const deleteProductHandler = (id: string) => {
+        removeProduct(id)
+    }
+
+    const selectProductHandler = (id: string) => {
+        // window.alert(`selected product id:${id}`)
+        setSelectedId(id)
     }
 
     const productTable = (
@@ -62,14 +99,18 @@ function ProductList() {
                         productState
                             .map(
                                 (p) => {
-                                    const pRow = <ProductRow key={p.id} productInfo={p} deleteProduct={deleteProductHandler} />
-                                    console.log(pRow);
+                                    const pRow = <ProductRow key={p.id} productInfo={p} deleteProductHandler={deleteProductHandler} selectProductHandler={selectProductHandler} />
+                                    //console.log(pRow);
                                     return pRow
                                 }
                             )
                     }
                 </tbody>
             </table>
+            <br />
+            {
+                selectedId > "0" ? <ProductDetail productId={selectedId} /> : <span>Select a product to view detail</span>
+            }
         </>
     )
 
@@ -87,6 +128,7 @@ function ProductList() {
         design = productTable
     }
 
+    console.log('returning the element')
     return design
 }
 

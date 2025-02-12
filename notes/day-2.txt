@@ -10,7 +10,9 @@ the state update is asynchronous, i.e., the react runtime does not block the mai
 
 whenever the state update is complete, a new version of VDOM or React Element will be created with updated data. React then will comprae the previous vesion of VDOM for the same component with the new version of VDOM using diff/diffing algo and then will update the already mounted ADOM
 
-state hook: useState()
+state hook:
+useState() => hooks up the component with a state, by creating the state with initial data
+
 this method returns an array, where first index has the copy of the data and second index has the refernce to a function to update the state of the data
 
 const arr = useState<T>(initialData)
@@ -106,10 +108,6 @@ delete an existing product:
 HTTP Method: DELETE
 http://localhost:3001/products/<id>
 
-
-lifecycle of component and effect hook
-
-
 const result = a / b
     if (result === Infinity)
         throw new Error('divisor should not be zero')
@@ -118,9 +116,35 @@ const result = a / b
 
 
 side effect causing code:
-any code that causes the component to be re-rendered (that is the side effect) by updatong the state of the component
+any code that causes the component to be re-rendered (that is the side effect) by updating the state of the component
 
 control the side effect causing code: decide when and how many times the side-effect causing code should be executed
+
+effect hook:
+useEffect() => hooks up the component with a side effect causing code that should be 
+	1. executed always
+	2. executed one time
+	3. excuted conditionally
+
+useEffect() does not return anything
+
+useEffect(
+ ()=>{ //side effect causing code },
+ [depndencies]
+)
+2nd argument (list of dependencies) is optional
+
+a. no depdency array
+useEffect( ()=> { //code }) => the side effect causing code will be executed every time the component is called
+
+b. blank/empty dependency array
+useEffct( ()=> { //code }, []) => the side effect causing code will be executed ONLY ONE time, the very fisrt time the component is called, NOT every time
+
+c.non-empty dependency array
+useEffct( ()=> { //code }, [dependencies])  => the side effect causing code will be executed every time, when the any of values mentioned in the dependency list changes
+
+when the component is called for the very first time (and subsequently mounted), you call useEffect and register a side-effect causing code TO BE excuted later.
+after the component function returns the react element (initial design to be displayed), then the rgistered callback function is executed
 
 
 
