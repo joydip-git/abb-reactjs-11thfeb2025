@@ -1,4 +1,6 @@
-[
+import { Product } from "../models/product";
+
+export const initialProductRecords: Product[] = [
     {
         "id": 1,
         "productName": "Leaf Rake",

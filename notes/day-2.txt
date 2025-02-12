@@ -1,0 +1,81 @@
+component will have data => stateful component
+rest of the smaller components will receive the data from parent and nicely present them => presentational component
+
+lifting the state up
+
+state of data: react helps you to maintain the state of the data which you want to be part of the component ONLY (not sharable between components)
+react runtime will track the changes made in the state (of data) and will recall the component and passes the updated state of data so that the updated data can be re-rendered 
+
+the state update is asynchronous, i.e., the react runtime does not block the main thread in which the app is running. 
+
+whenever the state update is complete, a new version of VDOM or React Element will be created with updated data. React then will comprae the previous vesion of VDOM for the same component with the new version of VDOM using diff/diffing algo and then will update the already mounted ADOM
+
+state hook: useState()
+this method returns an array, where first index has the copy of the data and second index has the refernce to a function to update the state of the data
+
+const arr = useState<T>(initialData)
+const data = arr[0]
+const updateData = arr[1]
+
+how to update the state of data??
+using the function reference (ex: updateData)
+
+NOTE: 
+	the state of data should never be update directly by mutating the original state. you should update the state of data by "immutably mutating"
+	the component can have many states
+
+w.r.t. my app:
+    //state variable-> an array
+    const state = useState<Product[]>(initialProductRecords)
+    //first index has the copy of the data
+    const productState: Product[] = state[0]
+    //second index has the refernce to the function to update the state of the data
+    const updateProductState = state[1]
+
+    //object (array) destructuring
+    const [productState, updateProductState] = useState<Product[]>(initialProductRecords)
+	
+
+
+A 	-> B -> C
+call()	
+
+
+A design:
+<B fnHandler={call} />
+
+B component:
+type BPropType={
+	fnHandler:()=>void
+}
+export function B(args:BPropType){
+	return (
+		<C fnHandler={args.fnHandler} />
+	)
+}
+
+
+C component:
+type CPropType={
+	fnHandler:()=>void
+}
+export function C(args:CPropType){
+	return (
+		<button onclick={args.fnHandler}>....
+	)
+}
+
+
+ProductRow({}) -> <ProductRow ..../>
+ProductList()  -> <ProductList ..../> 
+	ProductList()  -> <ProductList ..../> 
+App()	       -> <App../>
+
+
+diffing algorithm: finds out the difference between current VDOM and just previous VDOM.
+
+data fetching
+lifecycle of component and effect hook
+
+
+

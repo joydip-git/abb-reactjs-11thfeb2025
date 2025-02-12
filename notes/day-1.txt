@@ -216,6 +216,7 @@ Passing data between component:
 a. from parent to nested component:
 	pass data using props
 	props is nothing an object with a collection of properties using which we pass data from parent to nested component function
+	the properties in the props are readonly, i.e. the props object os readonly. should not mutate the object.
 
 	Non-JSX
 	const propsObj:ProductRowPropType={ productInfo:p, message:welcomeMessage}
