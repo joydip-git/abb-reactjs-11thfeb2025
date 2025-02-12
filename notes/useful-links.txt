@@ -1,0 +1,18 @@
+React JS:
+https://www.youtube.com/playlist?list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3
+
+react hooks:
+https://www.youtube.com/playlist?list=PLC3y8-rFHvwisvxhZ135pogtX7_Oe3Q3A
+
+Redux:
+https://www.youtube.com/playlist?list=PLC3y8-rFHvwheJHvseC3I0HuYI2f46oAK
+
+complete react: (udemy)
+https://www.udemy.com/course/react-the-complete-guide-incl-redux/?couponCode=ST9MT120225A
+
+Pre-requisite:
+.net core and then asp.net core
+https://dotnettutorials.net/course/asp-net-core-tutorials/
+
+RESTful app using ASP.NET Core Web API:
+https://dotnettutorials.net/course/asp-net-core-web-api-tutorials/

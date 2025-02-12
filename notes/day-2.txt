@@ -149,3 +149,25 @@ after the component function returns the react element (initial design to be dis
 
 
 
+app routes:
+http://localhost:4000		 	=> Home
+or
+http://localhost:4000/home	 	=> Home
+
+http://localhost:4000/products   	=> PL (nested PR components)
+
+http://localhost:4000/products/view/1 	=> PD
+
+http://localhost:4000/products/add 	=> AP
+
+any other url				=> PNF 
+
+react-router and react-router-dom
+
+{ id:"1",name:''}
+
+
+
+
+
+

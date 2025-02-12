@@ -1,19 +1,18 @@
 import { JSX, useEffect, useState } from "react"
 import { getProduct } from "../../../services/productservice"
 import { Product } from "../../../models/product"
-import { useParams } from "react-router-dom"
 
-const ProductDetail = () => {
-    const params = useParams()
-    const id = params.id
-
+type ProductDetailPropType = {
+    productId: string
+}
+const ProductDetail = (props: Readonly<ProductDetailPropType>) => {
     const [productState, updateProductState] = useState<Product | undefined>()
     const [fetchStatus, updateFetchStatus] = useState<boolean>(false)
     const [errorInfo, updateErrorInfo] = useState<string>('')
 
-    const fetchProductInfo = async (pid: string) => {
+    const fetchProductInfo = async () => {
         try {
-            const response = await getProduct(pid)
+            const response = await getProduct(props.productId)
             if (response.status == 200) {
                 updateProductState(response.data)
                 updateFetchStatus(true)
@@ -32,12 +31,10 @@ const ProductDetail = () => {
 
     useEffect(
         () => {
-            if (id && id > "0") {
-                console.log(`fetching product info for ${1}`);
-                fetchProductInfo(id)
-            }
+            console.log(`fetching product info for ${props.productId}`);
+            fetchProductInfo()
         },
-        []
+        [props.productId]
     )
 
     let design: JSX.Element;

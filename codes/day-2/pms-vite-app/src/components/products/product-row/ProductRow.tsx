@@ -1,17 +1,18 @@
+import { Link } from "react-router-dom"
 import { Product } from "../../../models/product"
 
 export type ProductRowPropType = {
     productInfo: Product,
     message?: string,
-    deleteProductHandler: (id: string) => void,
-    selectProductHandler: (id: string) => void
+    deleteProductHandler: (id: string) => void
 }
 const ProductRow = (props: Readonly<ProductRowPropType>) => {
-    // props.productInfo = { id: 1, productCode: '', productName: '', description: '', price: 0, imageUrl: '', starRating: 0, releaseDate: '' }
     return (
         <tr>
             <td>
-                <img src={props.productInfo.imageUrl} alt="NA" title={props.productInfo.productName} className="image-style" onClick={() => props.selectProductHandler(props.productInfo.id)} />
+                <Link to={`/products/view/${props.productInfo.id}`}>
+                    <img src={props.productInfo.imageUrl} alt="NA" title={props.productInfo.productName} className="image-style" />
+                </Link>
             </td>
             <td>{props.productInfo.productName}</td>
             <td>{props.productInfo.price}</td>
