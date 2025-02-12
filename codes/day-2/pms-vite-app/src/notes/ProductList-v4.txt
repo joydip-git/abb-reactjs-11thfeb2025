@@ -7,10 +7,11 @@ import { getProducts } from '../../../services/productservice'
 function ProductList() {
 
     const [productState, updateProductState] = useState<Product[]>([])
-    const [fetchStatus, updateFetchStatus] = useState<boolean>(false)
+    const [fetchStatus, updateFetchStatus] = useState<boolean | undefined>(undefined)
     const [errorInfo, updateErrorInfo] = useState<string>('')
 
     const fetchProducts = async () => {
+        updateFetchStatus(false)
         try {
             const response = await getProducts()
             if (response.status === 200) {
@@ -30,15 +31,13 @@ function ProductList() {
     }
 
     const deleteProductHandler = (id: number) => {
-        if (productState.length > 0) {
-            const copy = [...productState]
-            let foundIndex = -1;
-            foundIndex = copy.findIndex(p => p.id === id)
-            if (foundIndex >= 0) {
-                copy.splice(foundIndex, 1)
-                console.log(copy);
-                updateProductState(copy)
-            }
+        const copy = [...productState]
+        let foundIndex = -1;
+        foundIndex = copy.findIndex(p => p.id === id)
+        if (foundIndex >= 0) {
+            copy.splice(foundIndex, 1)
+            console.log(copy);
+            updateProductState(copy)
         }
     }
 
@@ -73,18 +72,50 @@ function ProductList() {
         </>
     )
 
+    const common = (
+        <button type='button' onClick={fetchProducts}>Load</button>
+    )
     let design: JSX.Element
-    if (fetchStatus === false) {
-        design = <span>Loading...</span>
+    if (fetchStatus === undefined) {
+        design = common
+    } else if (fetchStatus === false) {
+        design = (
+            <>
+                {common}
+                <br />
+                <span>Loading...</span>
+            </>
+        )
     }
     else if (errorInfo !== '') {
-        design = <span>{errorInfo}</span>
+        design = (
+            <>
+                {common}
+                <br />
+                <span>{errorInfo}</span>
+            </>
+        )
+
     }
     else if (!productState || productState.length === 0) {
-        design = <span>No records</span>
+        design = (
+            <>
+                {common}
+                <br />
+                <span>No records</span>
+            </>
+        )
     }
     else {
-        design = productTable
+        design = (
+            <>
+                {common}
+                <br />
+                {
+                    productTable
+                }
+            </>
+        )
     }
 
     return design

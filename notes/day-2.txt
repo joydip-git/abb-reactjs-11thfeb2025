@@ -74,8 +74,54 @@ App()	       -> <App../>
 
 diffing algorithm: finds out the difference between current VDOM and just previous VDOM.
 
-data fetching
+data fetching:
+	fetch: DOM API for sending HTTP requests
+	axios: 3rd party API for sending HTTP requests	
+	>npm i axios
+response model(JSON array of some objects) 	   client side model (Product[])
+[{},{},{}] 					   => [{},{},{}]
+
+get all products:
+HTTP Method: GET
+http://localhost:3001/products
+
+get a product:
+HTTP Method: GET
+http://localhost:3001/products/<id>
+
+add a product:
+HTTP Method: POST
+http://localhost:3001/products
+Content-Type: application/json
+Content: through request body send a product object
+
+update an existing product:
+HTTP Method: PUT
+http://localhost:3001/products/<id>
+Content-Type: application/json
+Content: through request body send a product object
+
+
+delete an existing product:
+HTTP Method: DELETE
+http://localhost:3001/products/<id>
+
+
 lifecycle of component and effect hook
+
+
+const result = a / b
+    if (result === Infinity)
+        throw new Error('divisor should not be zero')
+    else
+        return result
+
+
+side effect causing code:
+any code that causes the component to be re-rendered (that is the side effect) by updatong the state of the component
+
+control the side effect causing code: decide when and how many times the side-effect causing code should be executed
+
 
 
 

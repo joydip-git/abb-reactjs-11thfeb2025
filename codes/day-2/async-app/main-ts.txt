@@ -1,0 +1,42 @@
+// const divide = (a, b) => {
+//     const result = a / b
+//     if (result === Infinity)
+//         throw new Error('divisor should not be zero')
+//     else
+//         return result
+// }
+
+const divide = (a: number, b: number): Promise<number | unknown> => {
+    const p = new Promise(
+        //executor function
+        (resolveFnRef, rejectFnRef) => {
+            const divRes = a / b
+            if (divRes === Infinity) {
+                const err = new Error('divisor should not be zero')
+                rejectFnRef(err)
+                //rejectFnRef('divisor should not be zero')
+            }
+            else
+                resolveFnRef(divRes)
+            //return divRes
+        }
+    )
+    return p
+}
+
+const add = (a: number, b: number): number => a + b
+
+const divPromise: Promise<number | unknown> = divide(12, 0)
+divPromise
+    .then(
+        //called when promise "state" is "resolved/fulfilled"
+        (data) => {
+            console.log(data);
+            //call anther async method
+        },
+        //called when promise "state" is "rejected"
+        (reason) => { console.log(reason.message); }
+    )
+
+const addRes = add(12, 3)
+console.log(addRes);
